@@ -1,6 +1,7 @@
 import { prisma } from "../../../database/prisma";
 import {UserValidation} from '../../../common/validations/users/UserValidation';
 import bcrypt from 'bcrypt';
+import { randomInt } from "../../../common/utils/randomInt";
 interface DTOUserCreateService {
 	name: string;
 	email: string;
@@ -13,7 +14,7 @@ class UserCreateService {
 		if(await emailExists(email)) {
 			throw new Error("Email Already Exists!");
 		}
-		const hashPassword = await bcrypt.hash(password, 10);
+		const hashPassword = await bcrypt.hash(password, randomInt());
 		await prisma.user.create({
 			data: {
 				name,
@@ -21,8 +22,6 @@ class UserCreateService {
 				password: hashPassword
 			}
 		});
-
-    
 	}
 }
 

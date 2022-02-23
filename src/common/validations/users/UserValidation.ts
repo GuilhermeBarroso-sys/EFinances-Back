@@ -1,14 +1,16 @@
 import { prisma } from "../../../database/prisma";
-import { UserValidationInterface } from "./implements/UserValidationInterface";
+import { UserValidationInterface, EmailResponseObject } from "./implements/UserValidationInterface";
 import bcrypt from 'bcrypt';
 class UserValidation implements UserValidationInterface{
-	async  emailExists(email: string) {
-		const alreadyExists = await prisma.user.findFirst({
+	async emailExists(email: string, includeUser = false) {
+		const user = await prisma.user.findFirst({
 			where: {
 				email
 			}
 		});
-		return alreadyExists ? true : false;
+		const alreadyExists = user ? true : false;
+		const response : EmailResponseObject = includeUser ? {alreadyExists, user} : {alreadyExists,user: null};
+		return  response;  
 	}
 
 	async correctPassword(password: string, hashedPassword : string) {

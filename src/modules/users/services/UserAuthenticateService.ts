@@ -1,3 +1,4 @@
+import { User } from '@prisma/client';
 import {sign} from 'jsonwebtoken';
 import { UserValidation } from '../../../common/validations/users/UserValidation';
 import { prisma } from '../../../database/prisma';
@@ -7,16 +8,16 @@ interface DTOAuthenticateService {
 	password: string;
 }
 
+interface DTOAuthenticateResponse {
+	user: User,
+	token: string
+}
 class UserAuthenticateService {
-	async execute({email, password} : DTOAuthenticateService) {
+	async execute({email, password} : DTOAuthenticateService) :  Promise<DTOAuthenticateResponse> {
 
-		const {correctPassword} = new UserValidation;
-		const user = await prisma.user.findFirst({
-			where: {
-				email
-			}
-		});
-		if(!user) {
+		const {emailExists,correctPassword} = new UserValidation;
+		const {alreadyExists, user} = await emailExists(email, true);
+		if(!alreadyExists) {
 			throw new Error("invalid Email!");
 		}
 		if(!correctPassword(password, user.email)) {

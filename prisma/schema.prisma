@@ -8,33 +8,32 @@ datasource db {
 }
 
 model User {
-  id                      String @id @default(uuid())
-  name                    String
-  email                   String
-  password                String
-               
-  Transaction             Transaction[]
-  Account                 Account[]
+  id       String @id @default(uuid())
+  name     String
+  email    String
+  password String
+
+  Account Account[]
   @@map("users")
 }
 
 model Transaction {
-  id                     String   @id @default(uuid())
-  user                   User     @relation(fields: [user_id], references: [id])
-  user_id                String
-  value                  Float
-  category               String
-  Datetime               DateTime
-  Account                Account[]
+  id         String   @id @default(uuid())
+  account    Account  @relation(fields: [account_id], references: [id])
+  account_id String
+  value      Float
+  category   String
+  Datetime   DateTime
+
   @@map("transactions")
 }
 
 model Account {
-  id                     String      @id @default(uuid())
-  user                   User        @relation(fields: [user_id], references: [id])
-  transaction            Transaction @relation(fields: [transaction_id], references: [id])
-  user_id                String
-  transaction_id         String
-  physical_person        Boolean @default(true)
+  id              String  @id @default(uuid())
+  user            User    @relation(fields: [user_id], references: [id])
+  user_id         String
+  physical_person Boolean @default(true)
+
   @@map("accounts")
+  Transaction Transaction[]
 }

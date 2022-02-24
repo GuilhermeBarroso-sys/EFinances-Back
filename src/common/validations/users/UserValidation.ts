@@ -16,6 +16,18 @@ class UserValidation implements UserValidationInterface{
 	async correctPassword(password: string, hashedPassword : string) {
 		return await bcrypt.compare(password, hashedPassword);
 	}
+
+	async userExists(id: string) {
+		const user = await prisma.user.findUnique({
+			where: {
+				id
+			},
+			select: {
+				id: true
+			}
+		});
+		return user ? true : false;
+	}
 }
 
 export {UserValidation};

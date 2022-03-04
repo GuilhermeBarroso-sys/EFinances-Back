@@ -9,8 +9,10 @@
     "dev": "ts-node-dev --transpile-only --quiet --exit-child --ignore-watch node_modules src/index.ts",
     "build": "tsc",
     "heroku-postbuild": "yarn prisma db push",
-    "start": "node src/index.js",
-    "test": "jest"
+    "test": "jest",
+    "start": "node dist/index.js",
+    "postinstall": "tsc",
+    "deploy": "git add . && git commit -m Heroku && git push heroku master"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.16.11",

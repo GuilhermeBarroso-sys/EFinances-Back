@@ -7,13 +7,13 @@ interface DTOAccountFindOneService {
 class AccountFindOneService {
 	async execute({id,includeUser = true} : DTOAccountFindOneService) {
 		if(!id) throw new Error("400");
-		console.log(id);
 		const account =  await prisma.account.findUnique({
 			where: {
 				id
 			},
 			include: {
-				user: includeUser
+				user: includeUser,
+				Transaction: true
 			}
 		});
 		if(!account) {

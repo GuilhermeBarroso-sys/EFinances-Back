@@ -6,12 +6,14 @@ interface DTOUserCreateService {
 	name: string;
 	email: string;
 	password: string;
+
 }
 
 class UserCreateService {
 	async execute({name,email,password}: DTOUserCreateService) {
 		const {emailExists} = new UserValidation();
-		if(await emailExists(email)) {
+		const {alreadyExists} = await emailExists(email);
+		if(alreadyExists) {
 			throw new Error("Email Already Exists!");
 		}
 		const hashPassword = await bcrypt.hash(password, randomInt());

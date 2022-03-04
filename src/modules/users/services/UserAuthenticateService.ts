@@ -15,7 +15,7 @@ interface DTOAuthenticateResponse {
 class UserAuthenticateService {
 	async execute({email, password} : DTOAuthenticateService) :  Promise<DTOAuthenticateResponse> {
 
-		const {emailExists,correctPassword} = new UserValidation;
+		const {emailExists,correctPassword} = new UserValidation();
 		const {alreadyExists, user} = await emailExists(email, true);
 		if(!alreadyExists) {
 			throw new Error("invalid Email!");

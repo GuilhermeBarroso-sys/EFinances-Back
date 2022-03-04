@@ -12,7 +12,6 @@ model User {
   name     String
   email    String
   password String
-
   Account Account[]
   @@map("users")
 }
@@ -23,7 +22,7 @@ model Transaction {
   account_id String
   value      Float
   category   String
-  Datetime   DateTime
+  datetime   DateTime
 
   @@map("transactions")
 }
@@ -32,7 +31,7 @@ model Account {
   id              String  @id @default(uuid())
   user            User    @relation(fields: [user_id], references: [id])
   user_id         String
-  physical_person Boolean @default(true)
+  physical_person Boolean @default(true) 
 
   @@map("accounts")
   Transaction Transaction[]

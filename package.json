@@ -8,6 +8,7 @@
   "scripts": {
     "dev": "ts-node-dev --transpile-only --quiet --exit-child --ignore-watch node_modules src/index.ts",
     "build": "tsc",
+    "start": "prisma migrate dev && node index.js",
     "test": "jest"
   },
   "devDependencies": {

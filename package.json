@@ -9,7 +9,6 @@
     "dev": "ts-node-dev --transpile-only --quiet --exit-child --ignore-watch node_modules src/index.ts",
     "build": "tsc",
     "build:production": "tsc && node src/index.js",
-    "heroku-postbuild": "yarn prisma migrate dev && yarn build:production",
     "start": "node index.js",
     "test": "jest"
   },

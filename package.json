@@ -8,9 +8,8 @@
   "scripts": {
     "dev": "ts-node-dev --transpile-only --quiet --exit-child --ignore-watch node_modules src/index.ts",
     "build": "tsc",
-    "build:production": "node src/index.js",
-    "heroku-postbuild": "yarn prisma db push && yarn build:production",
-    "start": "node index.js",
+    "heroku-postbuild": "yarn prisma db push",
+    "start": "node src/index.js",
     "test": "jest"
   },
   "devDependencies": {

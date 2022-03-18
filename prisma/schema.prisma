@@ -8,11 +8,13 @@ datasource db {
 }
 
 model User {
-  id       String @id @default(uuid())
+  id       String    @id @default(uuid())
   name     String
   email    String
   password String
-  Account Account[]
+  
+  Account  Account[]
+  UserAccessControl UserAccessControl[]
   @@map("users")
 }
 
@@ -31,8 +33,32 @@ model Account {
   id              String  @id @default(uuid())
   user            User    @relation(fields: [user_id], references: [id])
   user_id         String
-  physical_person Boolean @default(true) 
+  physical_person Boolean @default(true)
 
-  @@map("accounts")
   Transaction Transaction[]
+  @@map("accounts")
+}
+
+model Role {
+  id        String @id @default(uuid())
+  name String
+
+  UserAccessControl UserAccessControl[]
+  @@unique([name], name: "role_name")
+  @@map("roles")
+}
+
+model UserAccessControl {
+  id         String  @id @default(uuid())
+  role       Role    @relation(fields: [role_name], references: [name]) 
+  user       User    @relation(fields: [user_id], references: [id]) 
+  user_id    String
+  isRoot     Boolean?   @default(false)
+  role_name  String  
+  can_create Boolean
+  can_read   Boolean
+  can_update Boolean
+  can_delete Boolean
+  @@index([role_name], name: "role_name")
+  @@map("users_access_control")
 }

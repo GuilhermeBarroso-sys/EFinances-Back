@@ -1,4 +1,4 @@
-import { prisma } from "../../../database/prisma";
+import { prisma } from "../../../../database/prisma";
 import { UserValidationInterface, EmailResponseObject } from "./implements/UserValidationInterface";
 import bcrypt from 'bcrypt';
 class UserValidation implements UserValidationInterface{

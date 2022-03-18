@@ -1,5 +1,6 @@
 import {Router} from 'express';
 import { needAuthentication } from '../../middlewares/needAuthentication';
+import { needAuthorization } from '../../middlewares/needAuthorization';
 import { UserAuthenticateController } from './controllers/UserAuthenticateController';
 import { UserCreateController } from './controllers/UserCreateController';
 import { UserFindOneController } from './controllers/UserFindOneController';

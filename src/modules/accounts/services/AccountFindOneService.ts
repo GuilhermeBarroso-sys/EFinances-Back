@@ -17,7 +17,7 @@ class AccountFindOneService {
 			}
 		});
 		if(!account) {
-			throw new Error("Account doesn't exist!");
+			throw new Error("Conta inexistente!");
 		}
 		includeUser && delete account.user.password;
 		return account;

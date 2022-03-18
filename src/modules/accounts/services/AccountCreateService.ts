@@ -3,14 +3,14 @@ interface DTOAccountCreateService {
 	physical_person?: boolean;
 }
 
-import {UserValidation} from '../../../common/validations/users/UserValidation';
+import {UserValidation} from '../../users/validations/users/UserValidation';
 import { prisma } from '../../../database/prisma';
 
 class AccountCreateService {
 	async execute({user_id,physical_person} : DTOAccountCreateService) {
 		const {userExists} = new UserValidation();
 		if(!(await userExists(user_id))) {
-			throw new Error("This user doens't exist!");
+			throw new Error("Esse usuario nao existe!");
 		}    
 		await prisma.account.create({
 			data: {

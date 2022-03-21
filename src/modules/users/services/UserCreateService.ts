@@ -15,11 +15,12 @@ class UserCreateService {
 		if(!name || !email || !password) {
 			throw new Error("Por favor, preencha os campos obrigatorios!");
 		}
-		const {emailExists} = new UserValidation();
+		const {emailExists, isValidEmail} = new UserValidation();
 		const {alreadyExists} = await emailExists(email);
-		if(alreadyExists) {
-			throw new Error("Email existente!");
-		}
+
+		if(alreadyExists) throw new Error("Email existente!");
+		if(!isValidEmail(email)) throw new Error("Email invalido!");
+		
 		const hashPassword = await bcrypt.hash(password, randomInt());
 		const {id} = await prisma.user.create({
 			data: {

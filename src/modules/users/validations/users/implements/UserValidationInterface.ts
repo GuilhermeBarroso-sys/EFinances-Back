@@ -6,5 +6,6 @@ export interface EmailResponseObject {
 export interface UserValidationInterface {
 	userExists(id: string) : Promise<boolean>
 	emailExists(email: string) : Promise<EmailResponseObject>
+	isValidEmail(email: string) : boolean;
 	correctPassword(password: string, hashedPassword : string) : Promise<boolean>
 }

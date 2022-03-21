@@ -2,6 +2,10 @@ import { prisma } from "../../../../database/prisma";
 import { UserValidationInterface, EmailResponseObject } from "./implements/UserValidationInterface";
 import bcrypt from 'bcrypt';
 class UserValidation implements UserValidationInterface{
+	isValidEmail(email: string) {
+		const emailFormat = /^w+([.-]?w+)*@w+([.-]?w+)*(.w{2,3})+$/;
+		return emailFormat.test(email) ? true : false ;
+	}
 	async emailExists(email: string, includeUser = false) {
 		const user = await prisma.user.findFirst({
 			where: {

@@ -8,7 +8,7 @@
   "scripts": {
     "dev": "ts-node-dev --transpile-only --quiet --exit-child --ignore-watch node_modules src/index.ts",
     "build": "tsc",
-    "heroku-postbuild": "yarn prisma migrate deploy && yarn prisma db push",
+    "heroku-postbuild": "yarn prisma db push",
     "test": "jest",
     "start": "node dist/src/index.js",
     "postinstall": "tsc",

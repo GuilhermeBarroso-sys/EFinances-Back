@@ -9,6 +9,12 @@ async function needAuthorization(request: Request, response: Response, next: Nex
 	const roles = await prisma.userAccessControl.findMany({
 		where: {
 			user_id
+		}, include: {
+			user: {
+				select: {
+					isRoot: true,
+				}
+			}
 		}
 	});
 
@@ -18,7 +24,7 @@ async function needAuthorization(request: Request, response: Response, next: Nex
 
 	const role = roles.find(role => role.role_name == route);	
 	
-	if(role?.isRoot || role?.can_read ) {
+	if(role.user.isRoot || role?.can_read) {
 		return next();
 	}
 	return response.status(403).json(`doesn't have permission`);

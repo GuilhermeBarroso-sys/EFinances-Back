@@ -8,10 +8,9 @@ import compression from 'compression';
 app.use(compression());
 app.use(cors({origin: '*'}));
 app.use(express.json());
-process.env.ENVIROMENT != 'production' && app.use(mockDelay);
+process.env.NODE_ENV != 'production' && app.use(mockDelay);
 app.use(routes);
 const port = process.env.PORT || 3001;
-console.log(process.env.NODE_ENV);
-app.listen(port, process.env.ENVIROMENT != 'production' && (() => {
+app.listen(port, process.env.NODE_ENV != 'production' && (() => {
 	console.log("Server is running!");
 }));

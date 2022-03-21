@@ -25,6 +25,7 @@ class UserCreateService {
 			data: {
 				name,
 				email,
+				isRoot,
 				password: hashPassword,
 			}
 		});

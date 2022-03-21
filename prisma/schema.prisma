@@ -8,57 +8,60 @@ datasource db {
 }
 
 model User {
-  id       String    @id @default(uuid())
-  name     String
-  email    String
-  password String
-  
-  Account  Account[]
+  id                String              @id @default(uuid())
+  name              String
+  email             String
+  password          String
+  isRoot            Boolean?            @default(false)
+  Account           Account[]
   UserAccessControl UserAccessControl[]
+
   @@map("users")
 }
 
 model Transaction {
   id         String   @id @default(uuid())
-  account    Account  @relation(fields: [account_id], references: [id])
-  account_id String
   value      Float
   category   String
+  account_id String
   datetime   DateTime
+  account    Account  @relation(fields: [account_id], references: [id])
 
+  @@index([account_id], map: "transactions_account_id_fkey")
   @@map("transactions")
 }
 
 model Account {
-  id              String  @id @default(uuid())
-  user            User    @relation(fields: [user_id], references: [id])
+  id              String        @id @default(uuid())
   user_id         String
-  physical_person Boolean @default(true)
+  physical_person Boolean       @default(true)
+  user            User          @relation(fields: [user_id], references: [id])
+  Transaction     Transaction[]
 
-  Transaction Transaction[]
+  @@index([user_id], map: "accounts_user_id_fkey")
   @@map("accounts")
 }
 
 model Role {
-  id        String @id @default(uuid())
-  name String
-
+  id                String              @id @default(uuid())
+  name              String              @unique
   UserAccessControl UserAccessControl[]
-  @@unique([name], name: "role_name")
+
   @@map("roles")
 }
 
 model UserAccessControl {
   id         String  @id @default(uuid())
-  role       Role    @relation(fields: [role_name], references: [name]) 
-  user       User    @relation(fields: [user_id], references: [id]) 
   user_id    String
-  isRoot     Boolean?   @default(false)
-  role_name  String  
-  can_create Boolean
   can_read   Boolean
+  can_create Boolean
   can_update Boolean
   can_delete Boolean
-  @@index([role_name], name: "role_name")
+  role_name  String
+  role       Role    @relation(fields: [role_name], references: [name])
+  user       User    @relation(fields: [user_id], references: [id])
+
+  @@index([role_name], map: "role_name")
+  @@index([user_id], map: "users_access_control_user_id_fkey")
   @@map("users_access_control")
 }

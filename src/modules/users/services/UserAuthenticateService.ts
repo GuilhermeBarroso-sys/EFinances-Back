@@ -17,9 +17,12 @@ class UserAuthenticateService {
 		if(!email || !password) throw new Error("Por favor, preencha os campos obrigatorios!");
 		const {emailExists,correctPassword} = new UserValidation();
 		const {alreadyExists, user} = await emailExists(email, true);
-
+    
 		if(!alreadyExists) throw new Error("Email Invalido!");
-		if(!correctPassword(password, user.email)) throw new Error("Senha invalida!");
+
+		const isValidPassword = await correctPassword(password, user.password);
+		
+		if(!isValidPassword) throw new Error("Senha invalida!");
 		
 		delete user.password;
 		const token = sign(

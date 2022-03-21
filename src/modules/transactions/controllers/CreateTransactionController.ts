@@ -5,7 +5,6 @@ class CreateTransactionsController {
 	async handle(request: Request, response : Response) {
 		const {value, category, datetime, account_id} = request.body;
 		try {
-			console.log(value, category, datetime, account_id);
 			const createTransactionService = new CreateTransactionService();
 			await createTransactionService.execute({value, category, datetime, account_id});
 			return response.status(201).send();

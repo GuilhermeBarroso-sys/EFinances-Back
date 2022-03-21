@@ -5,8 +5,8 @@ import { usersRoutes } from '../modules/users/users.routes';
 const routes = Router();
 
 routes.use('/users', usersRoutes);
-routes.use('/accounts', accountsRoutes);
-routes.use('/transactions', transactionsRoutes);
+routes.use('/accounts',accountsRoutes);
+routes.use('/transactions',transactionsRoutes);
 
 
 

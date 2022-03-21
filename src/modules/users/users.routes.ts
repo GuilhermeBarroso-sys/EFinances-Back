@@ -9,7 +9,7 @@ import { UserFindOneController } from './controllers/UserFindOneController';
 const usersRoutes = Router();
 usersRoutes.get('/', needAuthentication , new GetAuthenticateUserController().handle);
 usersRoutes.get('/:id', needAuthentication , new UserFindOneController().handle);
-usersRoutes.post('/', new UserCreateController().handle);
+usersRoutes.post('/' , new UserCreateController().handle);
 usersRoutes.post('/authenticate', new UserAuthenticateController().handle);
 
 export {usersRoutes};

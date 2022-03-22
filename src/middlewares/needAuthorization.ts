@@ -3,12 +3,14 @@ import { prisma } from "../database/prisma";
 
 async function needAuthorization(request: Request, response: Response, next: NextFunction) {
 
-	const {user_id, url} = request;
-	const [routeUrl,] = url.split('?');
-	const route = routeUrl.replace('/', '');
-	const roles = await prisma.userAccessControl.findMany({
+	const {user_id, baseUrl} = request;
+	const role_name = baseUrl.replace('/', '');
+	const role = await prisma.userAccessControl.findFirst({
 		where: {
-			user_id
+			user_id,
+			AND: [{
+				role_name
+			}]
 		}, include: {
 			user: {
 				select: {
@@ -17,14 +19,13 @@ async function needAuthorization(request: Request, response: Response, next: Nex
 			}
 		}
 	});
-
-	if(!roles) { 
-		return response.status(403).json(`this User doesn't have roles!`);
+	console.log(role);
+	if(!role) { 
+		return response.status(500).json(`this User doesn't have role(s)!`);
 	}
 
-	const role = roles.find(role => role.role_name == route);	
-	
-	if(role.user.isRoot || role?.can_read) {
+
+	if(role.user.isRoot || role.can_read) {
 		return next();
 	}
 	return response.status(403).json(`doesn't have permission`);

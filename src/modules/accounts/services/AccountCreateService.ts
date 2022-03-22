@@ -12,6 +12,7 @@ class AccountCreateService {
 		if(!(await userExists(user_id))) {
 			throw new Error("Esse usuario nao existe!");
 		}    
+   
 		await prisma.account.create({
 			data: {
 				user_id,

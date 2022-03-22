@@ -1,6 +1,6 @@
 {
   "roles": {
-      "dashboard": {
+      "transactions": {
         "can_create": true,
         "can_read": true,
         "can_update": true,

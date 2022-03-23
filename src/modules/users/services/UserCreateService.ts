@@ -30,6 +30,11 @@ class UserCreateService {
 				password: hashPassword,
 			}
 		});
+		await prisma.account.create({
+			data: {
+				user_id: id
+			}
+		});
 		const policies = createDefaultPolicies(id);
 		await prisma.userAccessControl.createMany({
 			data: [...policies]

@@ -22,6 +22,7 @@ model User {
 model Transaction {
   id         String   @id @default(uuid())
   value      Float
+  name       String
   category   String
   account_id String
   datetime   DateTime

@@ -19,12 +19,9 @@ async function needAuthorization(request: Request, response: Response, next: Nex
 			}
 		}
 	});
-	console.log(role);
 	if(!role) { 
 		return response.status(500).json(`this User doesn't have role(s)!`);
 	}
-
-
 	if(role.user.isRoot || role.can_read) {
 		return next();
 	}

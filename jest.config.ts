@@ -93,10 +93,15 @@ export default {
 	// notifyMode: "failure-change",
 
 	// A preset that is used as a base for Jest's configuration
-
-
-
-
+	// preset: undefined,
+	"preset": "ts-jest",
+	"testEnvironment": "node",
+	"transform": {
+		"node_modules/variables/.+\\.(j|t)sx?$": "ts-jest"
+	},
+	"transformIgnorePatterns": [
+		"node_modules/(?!variables/.*)"
+	]
 	// Run tests from one or more projects
 	// projects: undefined,
 

@@ -23,7 +23,7 @@ model Transaction {
   id         String   @id @default(uuid())
   value      Float
   name       String
-  category   String
+  type       String
   account_id String
   datetime   DateTime
   account    Account  @relation(fields: [account_id], references: [id])

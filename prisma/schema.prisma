@@ -22,10 +22,10 @@ model User {
 model Transaction {
   id         String   @id @default(uuid())
   value      Float
-  name       String
-  type       String
+  category   String
   account_id String
   datetime   DateTime
+  name       String
   account    Account  @relation(fields: [account_id], references: [id])
 
   @@index([account_id], map: "transactions_account_id_fkey")

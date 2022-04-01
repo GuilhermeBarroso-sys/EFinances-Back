@@ -10,7 +10,6 @@ class GetAuthenticateUserService {
 				Account: {
 					select: {
 						id: true,
-						physical_person: true
 					}
 				},
 				UserAccessControl: {

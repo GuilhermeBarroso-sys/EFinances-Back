@@ -11,7 +11,7 @@
     "heroku-postbuild": "yarn prisma migrate deploy && yarn prisma db push",
     "test": "jest",
     "start": "node dist/src/index.js",
-    "postinstall": "yarn tsc",
+    "postinstall": "tsc",
     "deploy": "git add . && git commit -m heroku && git push heroku master && git push"
   
   },

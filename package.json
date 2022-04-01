@@ -13,6 +13,7 @@
     "start": "node dist/src/index.js",
     "postinstall": "yarn tsc",
     "deploy": "git add . && git commit -m heroku && git push heroku master && git push"
+  
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",

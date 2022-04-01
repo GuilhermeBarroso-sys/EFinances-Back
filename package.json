@@ -15,7 +15,9 @@
     "deploy": "git add . && git commit -m heroku && git push heroku master && git push"
   
   },
-
+  "engines": {
+    "node": "17.x"
+  },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
     "@types/compression": "^1.7.2",

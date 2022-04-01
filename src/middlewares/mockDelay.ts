@@ -11,9 +11,8 @@ export function mockDelay(request: Request, response: Response, next : NextFunct
 		const delay = request.query.delay as string;
 		const ms = parseInt((delay ? delay : '1000'));
 		logging && console.log(
-			`\ndelayed mock successful\nurl: ${request.url}\ndelay: ${ms} ms\n`);
+			`\ndelayed mock successful\nurl: ${request.originalUrl}\ndelay: ${(ms / 1000)} Seconds\n`);
 		setTimeout(() => {
-
 			return next();
 		},ms);
 	} else {

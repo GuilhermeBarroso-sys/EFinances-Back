@@ -11,7 +11,7 @@ interface DTOICreateTransactionService {
 class CreateTransactionService {
 	async execute({name, value, type, datetime, account_id} : DTOICreateTransactionService) {
 		datetime = typeof(datetime) == 'string' ? convertToDate(datetime, 'yyyy-MM-dd HH:mm:ss') : datetime;
-		await prisma.transaction.create({
+		return await prisma.transaction.create({
 			data: {
 				name, value, type, datetime, account_id
 			}

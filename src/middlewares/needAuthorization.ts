@@ -14,7 +14,7 @@ async function needAuthorization(request: Request, response: Response, next: Nex
 		}, include: {
 			user: {
 				select: {
-					isRoot: true,
+					hierarchy: true,
 				}
 			}
 		}
@@ -22,7 +22,7 @@ async function needAuthorization(request: Request, response: Response, next: Nex
 	if(!role) { 
 		return response.status(500).json(`this User doesn't have role(s)!`);
 	}
-	if(role.user.isRoot || role.can_read) {
+	if(role.user.hierarchy === 'root' || role.can_read) {
 		return next();
 	}
 	return response.status(403).json(`doesn't have permission`);

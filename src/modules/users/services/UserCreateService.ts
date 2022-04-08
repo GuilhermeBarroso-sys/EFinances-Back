@@ -7,11 +7,11 @@ interface DTOUserCreateService {
 	name: string;
 	email: string;
 	password: string;
-	isRoot?: boolean;
+	hierarchy?: string;
 }
 
 class UserCreateService {
-	async execute({name,email,password, isRoot = false}: DTOUserCreateService) {
+	async execute({name,email,password, hierarchy = 'user'}: DTOUserCreateService) {
 		if(!name || !email || !password) {
 			throw new Error("Por favor, preencha os campos obrigatorios!");
 		}
@@ -26,7 +26,7 @@ class UserCreateService {
 			data: {
 				name,
 				email,
-				isRoot,
+				hierarchy,
 				password: hashPassword,
 			}
 		});

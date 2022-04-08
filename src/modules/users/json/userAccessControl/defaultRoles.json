@@ -1,11 +1,6 @@
 {
   "roles": {
-      "transactions": {
-        "can_create": true,
-        "can_read": true,
-        "can_update": true,
-        "can_delete": true
-      },
+
       "profile": {
         "can_create": false,
         "can_read": false,

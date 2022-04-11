@@ -8,7 +8,7 @@ import { GetUserTransactionsController } from './controllers/GetUserTransactions
 
 
 const transactionsRoutes = Router();
-transactionsRoutes.get('/:account_id', needAuthentication, needAuthorization, mockDelay, new GetUserTransactionsController().handle);
+transactionsRoutes.get('/:account_id', needAuthentication, mockDelay, new GetUserTransactionsController().handle);
 transactionsRoutes.post('/', needAuthentication, new CreateTransactionsController().handle);
 transactionsRoutes.delete('/', needAuthentication, new DeleteTransactionController().handle);
 

@@ -35,10 +35,10 @@ class UserCreateService {
 				user_id: id
 			}
 		});
-		const policies = createDefaultPolicies(id);
-		await prisma.userAccessControl.createMany({
-			data: [...policies]
-		});
+		// const policies = createDefaultPolicies(id);
+		// await prisma.userAccessControl.createMany({
+		// 	data: [...policies]
+		// });
 	}
 }
 

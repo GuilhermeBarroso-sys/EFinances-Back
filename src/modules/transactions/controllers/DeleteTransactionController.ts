@@ -10,6 +10,7 @@ class DeleteTransactionController {
 			return response.status(statusCode).send();
 		} catch(err) {
 			return response.status(400).json(err.message);
+      
 		}
 	}
 }

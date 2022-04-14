@@ -4,10 +4,8 @@ import { routes } from './routes/index.routes';
 const app = express();
 import cors from 'cors';
 import { mockDelay } from './middlewares/mockDelay';
-import compression from 'compression';
-app.use(compression());
-app.use(cors({origin: '*'}));
-
+const isLocal = process.env.NODE_ENV == 'dev' ? true : false;
+app.use(cors({origin: isLocal ? '*' : process.env.CORS }));
 app.use(express.json());
 process.env.NODE_ENV != 'production' && app.use(mockDelay);
 app.use(routes);

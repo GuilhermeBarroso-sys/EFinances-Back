@@ -7,7 +7,7 @@ class GetUserTransactionsService {
 				account_id
 			},
 			orderBy: {
-				id: 'desc'
+				datetime: 'desc'
 			},
 
 		});

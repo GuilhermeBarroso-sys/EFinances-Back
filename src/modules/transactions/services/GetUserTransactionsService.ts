@@ -16,13 +16,12 @@ class GetUserTransactionsService {
 		const outcome = transactions.filter(({type}) => type == 'outcome' ).map(({value}) => {return value;});
 		const incomeSum = income.length < 1 ? 0 : income.reduce((a,b) => {return a + b;});
 		const outcomeSum = outcome.length < 1 ? 0 : outcome.reduce((a,b) => {return a + b;});
-		const total = (incomeSum - outcomeSum).toFixed(2);
-    
+		const total = (incomeSum - outcomeSum);
 		return {
 			transactions,
-			income: incomeSum.toFixed(2),
-			outcome:outcomeSum.toFixed(2),
-			total
+			income: parseFloat(incomeSum.toFixed(2)),
+			outcome:parseFloat(outcomeSum.toFixed(2)),
+			total: parseFloat(total.toFixed(2))
 		};
 
     

@@ -16,7 +16,7 @@
   
   },
   "engines": {
-    "node": "17.x"
+    "node": "16.x"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",

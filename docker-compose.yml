@@ -1,0 +1,29 @@
+version: '3.7'
+
+services:
+  efinances:
+    image: postgres
+    container_name: efinancesPostgres
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=docker
+      - POSTGRES_PASSWORD=docker
+      - POSTGRES_DB=efinances
+    volumes:
+      - pgdata:/data/postgres
+    network_mode: host
+  app:  
+    build: . # Diretorio local
+    container_name: efinances
+    ports:
+      - 3001:3001
+    volumes:
+      - .:/usr/app #WORKDIR
+    network_mode: host
+
+
+volumes:
+  pgdata:
+    driver: local

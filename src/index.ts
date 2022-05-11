@@ -4,7 +4,7 @@ import { routes } from './routes/index.routes';
 const app = express();
 import cors from 'cors';
 import { mockDelay } from './middlewares/mockDelay';
-app.use(cors({origin: process.env.CORS }));
+app.use(cors({origin: '*' }));
 app.use(express.json());
 process.env.NODE_ENV != 'production' && app.use(mockDelay);
 app.use(routes);

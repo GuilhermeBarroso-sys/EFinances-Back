@@ -6,6 +6,7 @@
   - Prisma Orm
   - Postgres
   - Express
+  - Heroku
   - Axios
   - jsonwebtoken 
   - Eslint

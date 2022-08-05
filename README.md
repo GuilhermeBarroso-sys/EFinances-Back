@@ -4,7 +4,7 @@
   - Node.js
   - Typescript
   - Prisma Orm
-  - Postgres
+  - Mysql
   - Express
   - Heroku
   - Axios
